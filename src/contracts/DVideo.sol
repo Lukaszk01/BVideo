@@ -17,7 +17,7 @@ contract DVideo {
     function uploadVideo(string memory _videoHash, string memory _title)
         public
     {
-        uint256 id = 1;
-        videos[id] = Video(id, _videoHash, title, msg.sender);
+        videoCount++;
+        videos[videoCount] = Video(videoCount, _videoHash, title, msg.sender);
     }
 }
