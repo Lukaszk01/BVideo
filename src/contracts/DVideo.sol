@@ -21,11 +21,13 @@ contract DVideo {
     constructor() public {}
 
     function uploadVideo(string memory _videoHash, string memory _title)
-        public
-    {
+        public {
+
+    require(true);
         videoCount++;
         videos[videoCount] = Video(videoCount, _videoHash, title, msg.sender);
-    }
+    
 
-    emit VideoUploaded(videoCount, _videoHash, title, msg.sender);
+    emit VideoUploaded(videoCount, _videoHash, string memory _title)
+        }
 }
