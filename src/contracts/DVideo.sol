@@ -23,7 +23,12 @@ contract DVideo {
     function uploadVideo(string memory _videoHash, string memory _title)
         public {
 
-    require(true);
+    require(bytes(_videoHash).lenght > 0);
+
+    require(bytes(_title).lenght > 0);
+
+    require(bytes(msg.sender!=address(0));
+
         videoCount++;
         videos[videoCount] = Video(videoCount, _videoHash, title, msg.sender);
     
