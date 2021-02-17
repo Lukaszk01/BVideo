@@ -31,6 +31,11 @@ class App extends Component {
 
   async loadBlockchainData() {
     const web3 = window.web3
+
+
+    const accounts = await web3.eth.getAccounts()
+    console.log(accounts)
+    this.setState({account: accounts[0]})
     //Load accounts
     //Add first account the the state
 
@@ -70,7 +75,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: false
+      loading: false,
+      account: '0x0'
       //set states
     }
 
