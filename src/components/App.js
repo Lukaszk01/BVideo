@@ -38,6 +38,8 @@ class App extends Component {
     //Load accounts
     //Add first account the the state
 
+
+    new web3.eth.Contract(DVideo.abi, DVideo.networks[577].address)
     //Get network ID
     //Get network data
     //Check if net data exists, then
