@@ -18,7 +18,7 @@ class Main extends Component {
           <div className="col-md-2 overflow-auto text-center" style={{ maxHeight: '768px', minWidth: '175px' }}>
             <h5><b>{/* Share Video */}</b></h5>
             <form onSubmit={(event) => {
-              {/* Upload Video...*/}
+              // {/* Upload Video...*/}
             }} >
               &nbsp;
               {/* Get Video...*/}

@@ -31,14 +31,19 @@ class App extends Component {
 
   async loadBlockchainData() {
     const web3 = window.web3
-
-
     const accounts = await web3.eth.getAccounts()
     this.setState({account: accounts[0]})
   
 
+    const networkId = await web3.eth.net.getId()
+    const networkData = DVideo.networks[networkId]
+    if (networkData) {
+      const dvideo = new web3.eth.Contract(DVideo.abi, networkData.address)
 
-    new web3.eth.Contract(DVideo.abi, DVideo.networks[577].address)
+    } else {
+      window.alert('Dvideo contract not deployed to detected network.')
+    }
+    new web3.eth.Contract(DVideo.abi, DVideo.networks[networkId].address)
  
   }
 
