@@ -49,7 +49,43 @@ class App extends Component {
 
   //Upload video
   uploadVideo = title => {
+    console.log("Submitting file to IPFS...")
 
+    //adding file to the IPFS
+    ipfs.add(this.state.buffer, (error, result) => {
+      console.log('IPFS result', result)
+      if(error) {
+        console.error(error)
+        return
+      }
+
+      this.setState({ loading: true })
+      this.state.dvideo.methods.uploadVideo(result[0].hash, title).send({ from: this.state.account }).on('transactionHash', (hash) => {
+        this.setState({ loading: false })
+      })
+    })
+  }
+
+  changeVideo = (hash, title) => {
+    this.setState({'currentHash': hash});
+    this.setState({'currentTitle': title});
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      buffer: null,
+      account: '',
+      dvideo: null,
+      videos: [],
+      loading: true,
+      currentHash: null,
+      currentTitle: null
+    }
+
+    this.uploadVideo = this.uploadVideo.bind(this)
+    this.captureFile = this.captureFile.bind(this)
+    this.changeVideo = this.changeVideo.bind(this)
   }
 
   //Change Video
@@ -57,16 +93,9 @@ class App extends Component {
 
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: false,
-      account: '0x0'
-      //set states
-    }
 
     //Bind functions
-  }
+  
 
   render() {
     return (
@@ -77,7 +106,7 @@ class App extends Component {
         { this.state.loading
           ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
           : <Main
-              //states&functions
+              
             />
         }
       </div>
