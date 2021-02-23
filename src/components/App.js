@@ -31,18 +31,26 @@ class App extends Component {
 
   async loadBlockchainData() {
     const web3 = window.web3
+    // Load account
     const accounts = await web3.eth.getAccounts()
-    this.setState({account: accounts[0]})
-  
-
+    this.setState({ account: accounts[0] })
+    // Network ID
     const networkId = await web3.eth.net.getId()
     const networkData = DVideo.networks[networkId]
-    if (networkData) {
+    if(networkData) {
       const dvideo = new web3.eth.Contract(DVideo.abi, networkData.address)
+      this.setState({ dvideo })
+      const videosCount = await dvideo.methods.videoCount().call()
+      this.setState({ videosCount })
 
-    } else {
-      window.alert('Dvideo contract not deployed to detected network.')
-    }
+      // Load videos, sort by newest
+      for (var i=videosCount; i>=1; i--) {
+        const video = await dvideo.methods.videos(i).call()
+        this.setState({
+          videos: [...this.state.videos, video]
+        })
+      }
+      
     new web3.eth.Contract(DVideo.abi, DVideo.networks[networkId].address)
  
   }
