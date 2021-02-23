@@ -16,10 +16,26 @@ class Main extends Component {
             <h3>{/* Code... */}</h3>
           </div>
           <div className="col-md-2 overflow-auto text-center" style={{ maxHeight: '768px', minWidth: '175px' }}>
-            <h5><b>{/* Share Video */}</b></h5>
+            <h5><b>share video</b></h5>
             <form onSubmit={(event) => {
-              // {/* Upload Video...*/}
+              event.preventDefault()
+              const title = this.videoTitle.value
+              this.props.uploadVideo(title)
             }} >
+              &nbsp;
+              <input type='file' accept=".mp4, .mkv .ogg .wmv" onChange={this.props.captureFile} style={{ width: '250px' }} />
+                <div className="form-group mr-sm-2">
+                  <input
+                    id="videoTitle"
+                    type="text"
+                    ref={(input) => { this.videoTitle = input }}
+                    className="form-control-sm"
+                    placeholder="Title..."
+                    required />
+                </div>
+              <button type="submit" className="btn btn-danger btn-block btn-sm">Upload!</button>
+              &nbsp;
+            </form>
               &nbsp;
               {/* Get Video...*/}
               <div className="form-group mr-sm-2">
