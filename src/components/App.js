@@ -57,7 +57,15 @@ class App extends Component {
 
     //Get video
     captureFile = event => {
+      event.preventDefault();
+      const file = event.target.files[0]
+      const reader = new window.FileReader()
+      reader.readAsArrayBuffer(file)
 
+      reader.onloaded = () => {
+        this.state({ buffer: Buffer(reader.result) })
+        
+      }
     }
 
     //Upload video
@@ -119,7 +127,7 @@ class App extends Component {
           { this.state.loading
             ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
             : <Main
-              
+                captureFile={this.captureFile}
             />
           }
         </div>
