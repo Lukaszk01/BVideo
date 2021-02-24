@@ -30,7 +30,8 @@ class Main extends Component {
                     type="text"
                     ref={(input) => { this.videoTitle = input }}
                     className="form-control-sm"
-                    placeholder="Title..."
+                  placeholder="Title..."
+                  ref={(input) => {this.videoTitle = input}}
                     required />
                 </div>
               <button type="submit" className="btn btn-danger btn-block btn-sm">Upload!</button>
