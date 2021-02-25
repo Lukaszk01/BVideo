@@ -119,22 +119,25 @@ class App extends Component {
     //Bind functions
   
 
-    render() {
-      return (
-        <div>
-          <Navbar
-            account={this.state.account}
-          />
-          { this.state.loading
-            ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-            : <Main
+   render() {
+    return (
+      <div>
+        <Navbar 
+          account={this.state.account}
+        />
+        { this.state.loading
+          ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
+          : <Main
+              videos={this.state.videos}
               uploadVideo={this.uploadVideo}
-                captureFile={this.captureFile}
+              captureFile={this.captureFile}
+              changeVideo={this.changeVideo}
+              currentHash={this.state.currentHash}
+              currentTitle={this.state.currentTitle}
             />
-          }
-        </div>
-      );
-    }
+        }
+      </div>
+    );
   }
 }
 
