@@ -111,7 +111,8 @@ class App extends Component {
 
     //Change Video
     changeVideo = (hash, title) => {
-
+      this.setState({'currentHash': hash});
+      this.setState({'currentTitle': title});
     }
 
 
@@ -127,6 +128,7 @@ class App extends Component {
           { this.state.loading
             ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
             : <Main
+              uploadVideo={this.uploadVideo}
                 captureFile={this.captureFile}
             />
           }
